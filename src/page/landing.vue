@@ -518,63 +518,7 @@ export default {
             padding: 0 10px 44px;
             user-select: none;
             line-height: 38px;
-            .phone {
-              margin-bottom: 30px;
-              position: relative;
-              border-bottom: 1px solid $border_color_A;
-              .p-code {
-                cursor: pointer;
-                display: inline-block;
-                width: 72px;
-                .icn-down {
-                  display: inline-block;
-                  margin-top: 14px;
-                  @include bgImg(10px, 10px, "/images/icon/down.png");
-                  background-size: contain;
-                  transition: all 0.3s;
-                }
-                .rotate {
-                  transform: rotate(180deg);
-                }
-              }
-              .code-list {
-                position: absolute;
-                left: 0;
-                top: 38px;
-                width: 183px;
-                height: 288px;
-                line-height: 36px;
-                background-color: #fff;
-                border: 1px solid #eee;
-                overflow-y: auto;
-                .a-sort {
-                  padding: 0 12px;
-                }
-                .c-item {
-                  padding: 0 12px;
-                  &:hover {
-                    background-color: #f4f4f4;
-                    color: $basic_color;
-                  }
-                }
-              }
-              .p-inp {
-                padding-left: 10px;
-                width: 188px;
-                color: $font_color_B;
-              }
-            }
-            .v-code {
-              border-bottom: 1px solid $border_color_A;
-              margin-bottom: 40px;
-              .c-inp {
-                width: 180px;
-                margin-right: 18px;
-              }
-              .get-code-btn {
-                cursor: pointer;
-              }
-            }
+
             .r-btn {
               display: block;
               width: 100%;
