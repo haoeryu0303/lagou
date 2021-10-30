@@ -1,0 +1,5 @@
+@mixin bgImg($w, $h, $url) {
+  width: $w;
+  height: $h;
+  background: url($url) no-repeat;
+}
