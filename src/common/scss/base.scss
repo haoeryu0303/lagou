@@ -84,6 +84,30 @@
   display: none;
 }
 
+/** --------------部分公共样式-------------- */
+/** ------同意协议------ */
+.agree {
+  font-size: 12px;
+
+  .a-btn {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+  }
+
+  .agree-btn {
+    background-image: url("/images/icon/gx.png");
+  }
+
+  .no-agree-btn {
+    background-image: url("/images/icon/no_gx.png");
+  }
+}
+
+/** ------字体主题色------ */
 .green {
   color: $basic_color;
 }

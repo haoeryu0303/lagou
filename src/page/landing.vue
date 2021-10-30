@@ -591,23 +591,6 @@ export default {
               text-decoration: underline;
             }
           }
-          .agree {
-            font-size: 12px;
-            .a-btn {
-              display: inline-block;
-              vertical-align: middle;
-              margin-right: 5px;
-              width: 16px;
-              height: 16px;
-              background-size: contain;
-            }
-            .agree-btn {
-              background-image: url("/images/icon/gx.png");
-            }
-            .no-agree-btn {
-              background-image: url("/images/icon/no_gx.png");
-            }
-          }
         }
       }
     }
