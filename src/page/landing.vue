@@ -121,7 +121,7 @@
               </div>
               <div action="regist" class="r-form">
                 <p class="phone">
-                  <span class="p-code cf" @click="showCodeList = !showCodeList"
+                  <span class="p-code cf" @click.stop="showCodeList = !showCodeList"
                     >{{ checkCode }}
                     <i class="icn-down fr" :class="{ rotate: showCodeList }"></i>
                   </span>
@@ -257,14 +257,20 @@ export default {
   mounted() {
     this._getJob();
     this._getCode();
+    document.addEventListener("click", () => {
+      this.showCodeList = false;
+    });
   },
 };
 </script>
 <style lang='scss' scoped>
 @import "@/common/scss/variable.scss";
 @import "@/common/scss/mixin.scss";
+@import "@/common/scss/publicLR.scss";
 .landing {
   .header {
+    background-color: #fff;
+    height: 60px;
     .header-logo {
       height: 60px;
       line-height: 60px;

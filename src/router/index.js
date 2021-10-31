@@ -6,6 +6,8 @@ import Index from "@/page/index"
 import School from "@/page/school"
 import Companies from "@/page/companies"
 import Jobs from "@/page/jobs"
+import App from "@/page/app"
+import Course from "@/page/course"
 
 import Landing from "@/page/landing"
 import Login from "@/page/login"
@@ -47,6 +49,14 @@ export default new Router({
       path: '/school',
       name: "School",
       component: School,
+    }, {
+      path: '/app',
+      name: "App",
+      component: App,
+    }, {
+      path: '/course',
+      name: "Course",
+      component: Course,
     }]
   }]
 })

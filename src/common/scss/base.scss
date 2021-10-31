@@ -67,6 +67,7 @@
 
 .container {
   width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
 }
 
@@ -84,113 +85,7 @@
   display: none;
 }
 
-/** --------------部分公共样式-------------- */
-/** ------登录注册相关  起始------ */
-
-.agree {
-  font-size: 12px;
-
-  .a-btn {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-    width: 16px;
-    height: 16px;
-    background-size: contain;
-  }
-
-  .agree-btn {
-    background-image: url("/images/icon/gx.png");
-  }
-
-  .no-agree-btn {
-    background-image: url("/images/icon/no_gx.png");
-  }
-}
-
-.phone {
-  margin-bottom: 30px;
-  position: relative;
-  border-bottom: 1px solid $border_color_A;
-
-  .p-code {
-    cursor: pointer;
-    display: inline-block;
-    width: 72px;
-
-    .icn-down {
-      display: inline-block;
-      margin-top: 14px;
-      @include bgImg(10px, 10px, "/images/icon/down.png");
-      background-size: contain;
-      transition: all 0.3s;
-    }
-
-    .rotate {
-      transform: rotate(180deg);
-    }
-  }
-
-  .code-list {
-    position: absolute;
-    left: 0;
-    top: 38px;
-    width: 183px;
-    height: 288px;
-    line-height: 36px;
-    background-color: #fff;
-    border: 1px solid #eee;
-    overflow-y: auto;
-
-    .a-sort {
-      padding: 0 12px;
-    }
-
-    .c-item {
-      padding: 0 12px;
-
-      &:hover {
-        background-color: #f4f4f4;
-        color: $basic_color;
-      }
-    }
-  }
-
-  .p-inp {
-    padding-left: 10px;
-    width: 188px;
-    color: $font_color_B;
-  }
-}
-
-.v-code {
-  border-bottom: 1px solid $border_color_A;
-  margin-bottom: 40px;
-
-  .c-inp {
-    width: 180px;
-    margin-right: 18px;
-  }
-
-  .get-code-btn {
-    cursor: pointer;
-  }
-}
-
-.r-l-btn {
-  display: block;
-  width: 100%;
-  height: 48px;
-  line-height: 48px;
-  margin: 30px 0 40px;
-  text-align: center;
-  font-size: 16px;
-  color: #fff;
-  background-color: $basic_color;
-}
-
-/** ------登录注册相关  结束------ */
-/** ------字体主题色------ */
+/** ------ 主题色字体 ------ */
 .green {
   color: $basic_color;
 }

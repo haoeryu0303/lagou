@@ -1,6 +1,6 @@
-<!-- 公用底部组件 -->
+<!-- app下载页面 -->
 <template>
-  <div class="nav-footer">footer</div>
+  <div class="app"></div>
 </template>
 
 <script>
@@ -12,7 +12,4 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.nav-footer {
-  height: 2000px;
-}
 </style>
