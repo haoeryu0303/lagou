@@ -1,7 +1,28 @@
 <!-- 首页 -->
 <template>
   <div class="index" id="index">
-    <div class="container">index</div>
+    <div class="container">
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+      <p>ppppp</p>
+    </div>
   </div>
 </template>
 
@@ -15,6 +36,7 @@ export default {
 
 <style lang='scss' scoped>
 .index {
+  padding-top: 166px;
   .container {
     min-height: 1000px;
   }

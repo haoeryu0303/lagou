@@ -109,3 +109,16 @@ input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: $font_color_C;
 }
+
+// 文本选中背景色
+body ::selection {
+  color: #FFFFFF;
+  background-color: $basic_color;
+  text-shadow: none;
+}
+
+body ::-moz-selection {
+  color: #FFFFFF;
+  background-color: $basic_color;
+  text-shadow: none;
+}

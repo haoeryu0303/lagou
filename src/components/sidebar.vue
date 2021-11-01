@@ -24,6 +24,7 @@ export default {
   padding-top: 40px;
   box-shadow: -2px 0 2px 0 #00000020;
   width: 48px;
+  z-index: 200;
   .icn-side {
     position: relative;
     display: block;

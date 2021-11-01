@@ -31,9 +31,11 @@
       <div class="right fr">
         <div class="user"></div>
         <div class="no-user">
-          <span class="login">登录</span>
+          <a href="javascript:;" class="login"
+            ><i class="icn-nouser"></i>登录</a
+          >
           <i class="line">|</i>
-          <span class="register">注册</span>
+          <a href="javascript:;" class="register">注册</a>
         </div>
       </div>
     </div>
@@ -56,7 +58,12 @@ export default {
 
 <style lang='scss' scoped>
 @import "@/common/scss/variable.scss";
+@import "@/common/scss/mixin.scss";
 .nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: $nav_head_bg_color;
   .container {
     height: 40px;
@@ -111,6 +118,27 @@ export default {
       .no-user {
         .line {
           margin: 7px;
+        }
+        a {
+          color: $nav_font_color;
+          .icn-nouser {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            @include bgImg(
+              16px,
+              16px,
+              "/images/icon/icon_login@2x_a6d7b9d.png"
+            );
+            background-size: 16px 16px;
+          }
+          &:hover {
+            color: #fff;
+            .icn-nouser {
+              background: url("/images/icon/icon_login_hover@2x_c22b783.png");
+              background-size: 16px 16px;
+            }
+          }
         }
       }
     }

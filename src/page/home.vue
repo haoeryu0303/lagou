@@ -2,18 +2,20 @@
 <template>
   <div id="home" class="home">
     <nav-header v-if="show"></nav-header>
+    <search-header v-if="show"></search-header>
     <router-view></router-view>
-    <sidebar></sidebar>
     <nav-footer v-if="show"></nav-footer>
+    <sidebar></sidebar>
   </div>
 </template>
 
 <script>
 import NavFooter from "../components/NavFooter.vue";
 import NavHeader from "../components/NavHeader.vue";
+import SearchHeader from "../components/SearchHeader.vue";
 import Sidebar from "../components/sidebar.vue";
 export default {
-  components: { NavHeader, NavFooter, Sidebar },
+  components: { NavHeader, NavFooter, Sidebar, SearchHeader },
   data() {
     return {
       show: true,
