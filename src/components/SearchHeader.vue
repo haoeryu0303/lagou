@@ -65,7 +65,7 @@ export default {
 .search-header {
   position: fixed;
   left: 0;
-  right: 48px;
+  right: 0;
   top: 40px;
   padding: 18px 0 16px;
   background: $search_head_bg_color;

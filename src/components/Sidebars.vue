@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: "sidebar",
   data() {
     return {};
   },
@@ -18,13 +19,13 @@ export default {
 <style lang='scss' scoped>
 .sidebar {
   position: fixed;
+  width: 48px;
   right: 0;
   bottom: 0;
   top: 40px;
   padding-top: 40px;
   box-shadow: -2px 0 2px 0 #00000020;
-  width: 48px;
-  z-index: 200;
+  background-color: #fff;
   .icn-side {
     position: relative;
     display: block;

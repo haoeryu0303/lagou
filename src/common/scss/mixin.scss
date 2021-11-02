@@ -1,5 +1,19 @@
+// 背景图
 @mixin bgImg($w, $h, $url) {
   width: $w;
   height: $h;
   background: url($url) no-repeat;
+}
+
+// 阴影 h：水平阴影  v：垂直阴影  b：阴影模糊距离  s：阴影大小  color：阴影颜色
+@mixin boxS($h, $v, $b, $s, $color) {
+  box-shadow: $h $v $b $s $color;
+}
+
+// 文本溢出...  clamp：几行
+@mixin eps($clamp:1) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $clamp;
 }

@@ -193,11 +193,6 @@
         </ul>
       </div>
     </div>
-    <div class="nav-footer">
-      <h3 class="nav-logo">
-        <img src="/images/logo/logo.png" class="logo" />
-      </h3>
-    </div>
   </div>
 </template>
 <script>
@@ -567,12 +562,6 @@ export default {
         }
       }
     }
-  }
-  .nav-footer {
-    text-align: center;
-    padding: 30px 0 20px;
-    background-color: #fafafa;
-    border-top: 1px solid $border_color_B;
   }
 }
 </style>

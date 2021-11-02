@@ -3,25 +3,6 @@
   <div class="index" id="index">
     <div class="container">
       <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
-      <p>ppppp</p>
     </div>
   </div>
 </template>

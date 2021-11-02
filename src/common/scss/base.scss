@@ -36,25 +36,24 @@
   align-items: center;
 }
 
-// 多行文本溢出隐藏
-
-// 单行文本溢出隐藏
-
 // icon 图标
 .icon {
   display: inline-block;
+  vertical-align: middle;
   @include bgImg(auto, auto, '/images/icon/sprite_9dd5c92.png');
 }
 
 // icon_2 图标2
 .icon-2 {
   display: inline-block;
+  vertical-align: middle;
   @include bgImg(auto, auto, '/images/icon/third-sprite_d07ffce.png');
 }
 
 // icon_login 登录注册包含的图标
 .icon-10 {
   display: inline-block;
+  vertical-align: middle;
   @include bgImg(auto, auto, '/images/icon/popup-sprite_e5ea04f.png');
 }
 
@@ -88,6 +87,12 @@
 /** ------ 主题色字体 ------ */
 .green {
   color: $basic_color;
+}
+
+.green_h {
+  &:hover {
+    color: $basic_color !important;
+  }
 }
 
 // input 提示文字的默认颜色

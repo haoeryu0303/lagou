@@ -5,17 +5,19 @@
     <search-header v-if="show"></search-header>
     <router-view></router-view>
     <nav-footer v-if="show"></nav-footer>
-    <sidebar></sidebar>
+    <footers></footers>
+    <sidebars></sidebars>
   </div>
 </template>
 
 <script>
+import Footers from "../components/Footers.vue";
 import NavFooter from "../components/NavFooter.vue";
 import NavHeader from "../components/NavHeader.vue";
 import SearchHeader from "../components/SearchHeader.vue";
-import Sidebar from "../components/sidebar.vue";
+import Sidebars from "../components/Sidebars.vue";
 export default {
-  components: { NavHeader, NavFooter, Sidebar, SearchHeader },
+  components: { NavHeader, NavFooter, Sidebars, SearchHeader, Footers },
   data() {
     return {
       show: true,
@@ -39,6 +41,3 @@ export default {
   },
 };
 </script>
-
-<style lang='scss' scoped>
-</style>
