@@ -70,6 +70,7 @@ export default {
   padding: 18px 0 16px;
   background: $search_head_bg_color;
   min-width: 1200px;
+  z-index: 99;
   .container {
     width: 1200px;
     min-width: 1200px;

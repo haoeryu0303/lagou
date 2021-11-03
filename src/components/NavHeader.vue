@@ -65,6 +65,7 @@ export default {
   left: 0;
   right: 0;
   background-color: $nav_head_bg_color;
+  z-index: 99;
   .container {
     height: 40px;
     line-height: 40px;
