@@ -132,7 +132,7 @@ export default {
                 padding-bottom: 16px;
                 font-size: 12px;
                 .item-tit {
-                  font-size: 14px;
+                  font-size: 12px;
                   color: #999;
                   width: 70px;
                 }
