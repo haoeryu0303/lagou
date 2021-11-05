@@ -8,6 +8,16 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    getList() {
+      this.axios.post("/user").then((res) => {
+        console.log(res);
+      });
+    },
+  },
+  mounted() {
+    this.getList();
+  },
 };
 </script>
 

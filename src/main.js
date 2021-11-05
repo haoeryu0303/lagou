@@ -8,6 +8,7 @@ Vue.config.productionTip = false
 
 /**首页数据模拟json */
 require("./mock/index.js")
+import './mock/job.js'
 
 import "@/common/scss/reset.scss"
 import "@/common/scss/base.scss"

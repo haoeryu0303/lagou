@@ -69,15 +69,15 @@ Mock.mock('/hourJobList', /post|get/i, {
     },
     'pay|1': ["4k-6k", "7k-9k", "10k-20k*15薪", "20k-40k", "8k-16k", ],
     'indList|1-3': ['@ctitle(2,6)'],
-    'cpyImg': '/images/index/companies/cpy_logo_'+'@natural(1,14)'+'.png',
-    'cpyName': '@ctitle(2,8)' + '公司',
-    'workType|1': ['work' + '@word(1)'],
+    'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
+    'cpyName': '@ctitle(2,8)公司',
+    'workType|1': ['work@word(1)'],
     'finance|1': ['A轮', 'B轮', 'C轮', 'D轮', '天使轮', '上市公司'],
     'address': '@county(true)',
     'city': '@city',
     'jobDesc': {
-      'obligation|3-5': ['岗位职责-' + '@csentence(4,16)'],
-      'jobRequire|3-7': ['任职要求-' + '@csentence(8,20)'],
+      'obligation|3-5': ['岗位职责-@csentence(4,16)'],
+      'jobRequire|3-7': ['任职要求-@csentence(8,20)'],
     }
   }],
   // 最新职位列表
@@ -143,28 +143,58 @@ Mock.mock('/hourJobList', /post|get/i, {
     },
     'pay|1': ["4k-6k", "7k-9k", "10k-20k*15薪", "20k-40k", "8k-16k", ],
     'indList|1-3': ['@ctitle(2,6)'],
-    'cpyImg': '/images/index/companies/cpy_logo_'+'@natural(1,14)'+'.png',
-    'cpyName': '@ctitle(2,8)' + '公司',
-    'workType|1': ['work' + '@word(1)'],
+    'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
+    'cpyName': '@ctitle(2,8)公司',
+    'workType|1': ['work@word(1)'],
     'finance|1': ['A轮', 'B轮', 'C轮', 'D轮', '天使轮', '上市公司'],
     'address': '@county(true)',
     'city': '@city',
     'jobDesc': {
-      'obligation|3-5': ['岗位职责-' + '@csentence(4,16)'],
-      'jobRequire|3-7': ['任职要求-' + '@csentence(8,20)'],
+      'obligation|3-5': ['岗位职责-@csentence(4,16)'],
+      'jobRequire|3-7': ['任职要求-@csentence(8,20)'],
     }
   }],
   // 公司列表
   'cpyList|8': [{
     'id|1001-9999': 1001,
     'indList|1-3': ['@ctitle(2,3)'],
-    'cpyImg': '/images/index/companies/cpy_logo_'+'@natural(1,14)'+'.png',
-    'cpyName': '@ctitle(2,8)' + '公司',
-    'finance|1': ['不需要融资','A轮', 'B轮', 'C轮', 'D轮', '天使轮', '上市公司'],
+    'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
+    'cpyName': '@ctitle(2,8)公司',
+    'finance|1': ['不需要融资', 'A轮', 'B轮', 'C轮', 'D轮', '天使轮', '上市公司'],
     'city': '@city',
-    'desc':'@csentence(12,30)',
-    'ms|1-99':1,
-    'job|1-99':1,
-    'jl|1-99':1,
+    'desc': '@csentence(12,30)',
+    'ms|1-99': 1,
+    'job|1-99': 1,
+    'jl|1-99': 1,
   }]
+})
+Mock.mock('/hotLink', /post|get/i, {
+  // 热门链接列表
+  hotLink: {
+    blogroll: {
+      id: 1,
+      'list|20-50': ['@ctitle(2,6)'],
+    },
+    hotCity: {
+      id: 2,
+      'list|20-50': ['@city()人才网'],
+    },
+    hotCpy: {
+      id: 3,
+      'list|20-50': ['@ctitle(2,5)招聘'],
+    },
+    hotJob: {
+      id: 4,
+      'list|20-50': ['@ctitle(2,6)招聘'],
+    },
+    hotInd: {
+      id: 5,
+      'list|20-50': ['@ctitle(2,6)'],
+    },
+    hotKey: {
+      id: 6,
+      'list|20-50': ['@ctitle(2,6)'],
+    }
+
+  }
 })

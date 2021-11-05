@@ -61,6 +61,7 @@ export default {
 .nav-footer {
   border-top: 1px solid $border_color_B;
   padding: 49px 0 66px;
+  margin-top: 40px;
   .container {
     margin: 0 auto;
     .qr-wrap {

@@ -212,6 +212,41 @@
         </ul>
         <a href="javascript:;" class="more more-cpy">查看更多</a>
       </div>
+      <div class="hot-link">
+        <h3 class="head">
+          <span
+            class="h-item"
+            :class="{ 'h-active': hotLink.showHot == hotItem.id }"
+            v-for="hotItem in hotLink.hotList"
+            :key="hotItem.id"
+            @click="hotLink.showHot = hotItem.id"
+            >{{ hotItem.name }}</span
+          >
+        </h3>
+        <div class="link-wraps">
+          <span class="more-btn" @click="allLink = !allLink"
+            >{{ !allLink ? "展开" : "收起" }}
+            <i class="icn" :class="{ 'i-up': allLink }"></i
+          ></span>
+          <div
+            class="link-wrap"
+            :class="{
+              'all-link': !allLink,
+              'show-link': hotLink.showHot == hItem.id,
+            }"
+            v-for="hItem in hotLinkItem"
+            :key="hItem.id"
+          >
+            <a
+              href="javascript:;"
+              class="link green_h"
+              v-for="(lItem, lIndex) in hItem.list"
+              :key="lIndex"
+              >{{ lItem }}</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -253,6 +288,20 @@ export default {
       hourJobList: [], //24小时热门职位列表
       newJobList: [], //最新职位列表
       cpyList: [], //公司列表
+      //热门链接
+      hotLink: {
+        showHot: 1,
+        hotList: [
+          { id: 1, name: "友情链接" },
+          { id: 2, name: "热门城市" },
+          { id: 3, name: "热门公司" },
+          { id: 4, name: "热门职位" },
+          { id: 5, name: "热门行业" },
+          { id: 6, name: "热门关键词" },
+        ],
+      },
+      hotLinkItem: {},
+      allLink: false,
     };
   },
   directives: {
@@ -277,7 +326,13 @@ export default {
         this.hourJobList = res.data.hourJobList;
         this.newJobList = res.data.newJobList;
         this.cpyList = res.data.cpyList;
-        console.log(res.data.cpyList);
+      });
+    },
+    // 获取热门链接
+    _gethotLink() {
+      this.axios("/hotLink").then((res) => {
+        this.hotLinkItem = res.data.hotLink;
+        console.log(this.hotLinkItem);
       });
     },
   },
@@ -285,6 +340,7 @@ export default {
     this._getNavList();
     this._getBanner();
     this._getHourJobList();
+    this._gethotLink();
   },
 };
 </script>
@@ -461,7 +517,8 @@ export default {
       }
     }
     .job-wraps,
-    .cpy-wraps {
+    .cpy-wraps,
+    .hot-link {
       .head {
         line-height: 32px;
         font-size: 16px;
@@ -537,9 +594,13 @@ export default {
               line-height: 20px;
             }
           }
+          &:hover {
+            margin-top: 13px;
+            transition: margin-top 0.2s;
+          }
         }
         .j-last-item {
-          margin-right: 0;
+          margin-right: 0 !important;
         }
       }
       .cpy-wrap {
@@ -568,7 +629,6 @@ export default {
               border-radius: 20px;
             }
           }
-
           .tip,
           .desc {
             @include eps(1);
@@ -594,16 +654,58 @@ export default {
               }
             }
           }
+          &:hover {
+            margin-top: 13px;
+            transition: margin-top 0.2s;
+          }
         }
         .c-last-item {
           margin-right: 0;
         }
       }
+      .link-wraps {
+        position: relative;
+        .link-wrap {
+          display: none;
+          line-height: 20px;
+          width: 1100px;
+          .link {
+            margin-right: 14px;
+            white-space: nowrap;
+            color: #666;
+          }
+        }
+        .all-link {
+          @include eps(1);
+        }
+        .show-link {
+          display: block;
+        }
+        .more-btn {
+          position: absolute;
+          right: 0;
+          top: 0;
+          cursor: pointer;
+          color: #999;
+          .icn {
+            display: inline-block;
+            margin-left: 5px;
+            vertical-align: middle;
+            transition: all 0.3s;
+            @include bgImg(12px, 6px, "/images/icon/arrow_down2_eea7e54.png");
+          }
+          .i-up {
+            transition: all 0.3s;
+            transform: rotate(180deg);
+          }
+        }
+      }
+
       .more {
         display: block;
         width: 300px;
         line-height: 42px;
-        margin: 20px auto 30px;
+        margin: 20px auto 0;
         border: 1px solid $basic_color;
         text-align: center;
         color: $basic_color;
@@ -613,11 +715,6 @@ export default {
           color: #fff;
         }
       }
-    }
-    .job-wraps {
-    }
-    .cpy-wraps {
-      margin-bottom: 30px;
     }
   }
 }
