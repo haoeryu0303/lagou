@@ -2,8 +2,8 @@
 <template>
   <div class="index" id="index">
     <div class="container">
-      <div class="wrap">
-        <ul class="main-nav">
+      <div class="wrap cf">
+        <ul class="main-nav fl">
           <li
             class="nav-item"
             v-for="(item, index) in mainNavList"
@@ -43,32 +43,252 @@
             </div>
           </li>
         </ul>
-        <div class="banner"></div>
+        <div class="banner fr" v-show="banner.length != 0">
+          <swiper ref="mySwiper" :options="swiperOptions">
+            <swiper-slide v-for="(item, index) in banner" :key="index">
+              <a :href="item.url">
+                <img :src="item.imgUrl" class="img" />
+              </a>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+          <div class="btn-box">
+            <em class="btn btn-prev">prev</em>
+            <em class="btn btn-next">next</em>
+          </div>
+        </div>
+      </div>
+      <div class="job-wraps">
+        <h3 class="head">
+          <span
+            class="h-item"
+            :class="{ 'h-active': jobItem == 1 }"
+            @click="jobItem = 1"
+            >24Hour热门</span
+          ><span
+            class="h-item"
+            :class="{ 'h-active': jobItem == 2 }"
+            @click="jobItem = 2"
+            >最新职位</span
+          >
+        </h3>
+        <ul class="job-wrap job-wrap-1 cf" v-if="jobItem == 1">
+          <li
+            class="j-item boxS_h fl"
+            :class="{ 'j-last-item': index % 3 == 2 }"
+            v-for="(item, index) in hourJobList"
+            :key="item.id"
+          >
+            <div class="job">
+              <p class="j-head cf">
+                <span class="name">{{ item.name }}</span>
+                <span class="time">[{{ item.pushTime }}发布]</span>
+                <span class="pay fr">{{ item.pay }}</span>
+              </p>
+              <p class="tip" v-if="item.require">
+                <span>经验{{ item.require.exp }}</span>
+                <span class="line">/</span>
+                <span>{{ item.require.edu }}</span>
+              </p>
+              <div class="lables">
+                <span
+                  class="br-3"
+                  v-for="(labItem, labIndex) in item.indList"
+                  :key="labIndex"
+                  >{{ labItem }}</span
+                >
+              </div>
+            </div>
+            <div class="cpy cf">
+              <a href="javascript:;"
+                ><img :src="item.cpyImg" class="cpy-img fl"
+              /></a>
+              <div class="cpy-info fl">
+                <p class="name">
+                  <a href="javascript:;" class="green">{{ item.cpyName }}</a>
+                </p>
+                <p class="tip">
+                  <span>{{ item.workType }}</span>
+                  <span class="line">/</span>
+                  <span>{{ item.finance }}</span>
+                  <span class="line">/</span>
+                  <span>{{ item.city }}</span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul class="job-wrap job-wrap-2 cf" v-if="jobItem == 2">
+          <li
+            class="j-item boxS_h fl"
+            :class="{ 'j-last-item': index % 3 == 2 }"
+            v-for="(item, index) in newJobList"
+            :key="item.id"
+          >
+            <div class="job">
+              <p class="j-head cf">
+                <span class="name">{{ item.name }}</span>
+                <span class="time">[{{ item.pushTime }}发布]</span>
+                <span class="pay fr">{{ item.pay }}</span>
+              </p>
+              <p class="tip" v-if="item.require">
+                <span>经验{{ item.require.exp }}</span>
+                <span class="line">/</span>
+                <span>{{ item.require.edu }}</span>
+              </p>
+              <div class="lables">
+                <span
+                  class="br-3"
+                  v-for="(labItem, labIndex) in item.indList"
+                  :key="labIndex"
+                  >{{ labItem }}</span
+                >
+              </div>
+            </div>
+            <div class="cpy cf">
+              <a href="javascript:;"
+                ><img :src="item.cpyImg" class="cpy-img fl"
+              /></a>
+              <div class="cpy-info fl">
+                <p class="name green">
+                  <a href="javascript:;">{{ item.cpyName }}</a>
+                </p>
+                <p class="tip">
+                  <span>{{ item.workType }}</span>
+                  <span class="line">/</span>
+                  <span>{{ item.finance }}</span>
+                  <span class="line">/</span>
+                  <span>{{ item.city }}</span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <a href="javascript:;" class="more more-job">查看更多</a>
+      </div>
+      <div class="cpy-wraps">
+        <h3 class="head">
+          <span class="h-item" :class="{ 'h-active': cpyItem == 1 }"
+            >互联网热门公司榜</span
+          >
+        </h3>
+        <ul class="cpy-wrap cpy-wrap-1 cf" v-if="cpyItem == 1">
+          <li
+            class="c-item boxS_h fl"
+            :class="{ 'c-last-item': cpyIndex % 4 == 3 }"
+            v-for="(cpyItem, cpyIndex) in cpyList"
+            :key="cpyItem.id"
+          >
+            <div class="top">
+              <a href="javascript:;" class="cpy-logo">
+                <img :src="cpyItem.cpyImg" class="i-logo" />
+              </a>
+              <div class="c-name">
+                <a href="javascript:;">{{ cpyItem.cpyName }}</a>
+              </div>
+              <p class="tip">
+                <span v-for="(iItem, iIndex) in cpyItem.indList" :key="iIndex"
+                  ><em v-if="iIndex != 0">,</em>{{ iItem }}</span
+                ><span class="line">/</span>
+                <span>{{ cpyItem.finance }}</span>
+              </p>
+              <p class="desc">{{ cpyItem.desc }}</p>
+            </div>
+            <div class="cpy-job cf">
+              <a href="javascript:;" class="item green_h fl">
+                <span class="i-count green">{{ cpyItem.ms }}</span>
+                <span class="i-name">面试评价</span>
+              </a>
+              <a href="javascript:;" class="item green_h fl">
+                <span class="i-count green">{{ cpyItem.job }}</span>
+                <span class="i-name">在招职位</span>
+              </a>
+              <a href="javascript:;" class="item green_h fl">
+                <span class="i-count green">{{ cpyItem.jl }}%</span>
+                <span class="i-name">简历处理率</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+        <a href="javascript:;" class="more more-cpy">查看更多</a>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   data() {
     return {
-      mainNavList: [],
+      mainNavList: [], //job类型导航列表
+      banner: [], //banner
+      swiperOptions: {
+        navigation: {
+          nextEl: ".btn-next",
+          prevEl: ".btn-prev",
+        },
+        // 分页器
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        // 循环
+        loop: true,
+        // 切换效果
+        effect: "slide",
+        initialSlide: 1,
+        // 自动
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+      }, //banner控件
+      jobItem: 1, //当前显示的 job（工作）列表详情
+      cpyItem: 1, //当前显示的 cpy（公司）列表详情
+      hourJobList: [], //24小时热门职位列表
+      newJobList: [], //最新职位列表
+      cpyList: [], //公司列表
     };
+  },
+  directives: {
+    swiper: directive,
   },
   methods: {
     // 获取导航栏列表
     _getNavList() {
-      this.axios.get("/json/index_nav.json").then((res) => {
+      this.axios.get("/json/index/nav.json").then((res) => {
         this.mainNavList = res.data.jobTypeList;
+      });
+    },
+    // 获取首页banner
+    _getBanner() {
+      this.axios.get("/json/index/banner.json").then((res) => {
+        this.banner = res.data.banner;
+      });
+    },
+    // 获取首页 24hour，最新工作，公司 列表
+    _getHourJobList() {
+      this.axios("/hourJobList").then((res) => {
+        this.hourJobList = res.data.hourJobList;
+        this.newJobList = res.data.newJobList;
+        this.cpyList = res.data.cpyList;
+        console.log(res.data.cpyList);
       });
     },
   },
   mounted() {
     this._getNavList();
+    this._getBanner();
+    this._getHourJobList();
   },
 };
 </script>
-<style lang='scss' scoped>
+<style lang='scss'>
 @import "@/common/scss/mixin.scss";
 @import "@/common/scss/variable.scss";
 .index {
@@ -125,6 +345,7 @@ export default {
               line-height: 22px;
               margin-bottom: 20px;
               font-size: 16px;
+              padding-left: 10px;
             }
             .all {
               .all-item {
@@ -134,7 +355,8 @@ export default {
                 .item-tit {
                   font-size: 12px;
                   color: #999;
-                  width: 70px;
+                  width: 60px;
+                  padding-left: 10px;
                 }
                 .item-wrap {
                   display: inline-block;
@@ -170,6 +392,232 @@ export default {
           }
         }
       }
+      .banner {
+        position: relative;
+        width: 649px;
+        height: 286px;
+        padding: 10px 0;
+        a {
+          .img {
+            width: 649px;
+            height: 286px;
+          }
+        }
+        .btn-box {
+          display: none;
+          .btn {
+            position: absolute;
+            top: 50%;
+            margin-top: -17px;
+            width: 18px;
+            height: 34px;
+            cursor: pointer;
+            text-indent: -99999px;
+            z-index: 10;
+          }
+          .btn-prev {
+            left: 16px;
+            @include bgImg(
+              18px,
+              34px,
+              "/images/icon/banner_arrow_left_80dbc0e.png"
+            );
+            &:hover {
+              background-image: url("/images/icon/banner_arrow_left_highlight_2dc5ef7.png");
+            }
+          }
+          .btn-next {
+            right: 16px;
+            @include bgImg(
+              18px,
+              34px,
+              "/images/icon/banner_arrow_right_04d6575.png"
+            );
+            &:hover {
+              background-image: url("/images/icon/banner_arrow_right_highlight_8f1f320.png");
+            }
+          }
+        }
+        .swiper-pagination {
+          .swiper-pagination-bullet {
+            background: #fff !important;
+            opacity: 0.5;
+            &:hover {
+              opacity: 1;
+            }
+          }
+          .swiper-pagination-bullet-active {
+            width: 16px;
+            border-radius: 8px;
+            background: #fff;
+            opacity: 1;
+          }
+        }
+        &:hover {
+          .btn-box {
+            display: block;
+          }
+        }
+      }
+    }
+    .job-wraps,
+    .cpy-wraps {
+      .head {
+        line-height: 32px;
+        font-size: 16px;
+        margin: 40px 0 10px;
+        border-bottom: 1px solid $border_color_B;
+        .h-item {
+          display: inline-block;
+          margin-right: 60px;
+          height: 32px;
+          color: #999;
+          cursor: pointer;
+        }
+        .h-active {
+          color: #333;
+          border-bottom: 2px solid #333;
+        }
+      }
+      .job-wrap {
+        .j-item {
+          width: 390px;
+          height: 200px;
+          border: 1px solid $border_color_B;
+          box-sizing: border-box;
+          padding: 20px 18px 0;
+          margin: 15px 15px 0 0;
+          color: #999;
+          .line {
+            margin: 0 4px;
+          }
+          .job {
+            height: 90px;
+            padding-bottom: 18px;
+            border-bottom: 1px dashed $border_color_B;
+            margin-bottom: 18px;
+            .j-head {
+              line-height: 28px;
+              .name {
+                display: inline-block;
+                font-size: 16px;
+                color: #333;
+                max-width: 100px;
+                margin-right: 18px;
+              }
+              .pay {
+                color: $pay_color;
+              }
+            }
+            .tip {
+              line-height: 30px;
+            }
+            .lables {
+              margin-top: 5px;
+              span {
+                display: inline-block;
+                margin-right: 8px;
+                // width: 61px;
+                height: 26px;
+                line-height: 26px;
+                border: 1px solid $border_color_D;
+                font-size: 12px;
+                padding: 0 5px;
+              }
+            }
+          }
+          .cpy {
+            .cpy-img {
+              width: 40px;
+              height: 40px;
+              margin-right: 15px;
+              border-radius: 8px;
+            }
+            .cpy-info {
+              line-height: 20px;
+            }
+          }
+        }
+        .j-last-item {
+          margin-right: 0;
+        }
+      }
+      .cpy-wrap {
+        .c-item {
+          width: 288px;
+          height: 270px;
+          margin: 16px 16px 0 0;
+          box-sizing: border-box;
+          text-align: center;
+          color: #999;
+          border: 1px solid $border_color_B;
+          .top {
+            padding: 20px 0 14px;
+            margin: 0 13px;
+            border-bottom: 1px dashed $border_color_B;
+          }
+          .line {
+            margin: 0 5px;
+          }
+          .cpy-logo {
+            display: inline-block;
+            margin-bottom: 12px;
+            .i-logo {
+              width: 100px;
+              height: 100px;
+              border-radius: 20px;
+            }
+          }
+
+          .tip,
+          .desc {
+            @include eps(1);
+            line-height: 20px;
+          }
+          .c-name {
+            line-height: 24px;
+            color: #333;
+            font-size: 16px;
+            @include eps(1);
+          }
+          .cpy-job {
+            .item {
+              width: 90px;
+              height: 52px;
+              margin-top: 12px;
+              color: #999;
+              .i-count {
+                padding-bottom: 8px;
+              }
+              span {
+                display: block;
+              }
+            }
+          }
+        }
+        .c-last-item {
+          margin-right: 0;
+        }
+      }
+      .more {
+        display: block;
+        width: 300px;
+        line-height: 42px;
+        margin: 20px auto 30px;
+        border: 1px solid $basic_color;
+        text-align: center;
+        color: $basic_color;
+        font-size: 16px;
+        &:hover {
+          background-color: $basic_color;
+          color: #fff;
+        }
+      }
+    }
+    .job-wraps {
+    }
+    .cpy-wraps {
+      margin-bottom: 30px;
     }
   }
 }

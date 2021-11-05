@@ -245,7 +245,6 @@ export default {
     _getCode() {
       this.axios.get("/json/code.json").then((res) => {
         this.codeList = res.data.codelist;
-        console.log(this.codeList);
       });
     },
   },

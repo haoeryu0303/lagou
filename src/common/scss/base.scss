@@ -127,3 +127,10 @@ body ::-moz-selection {
   background-color: $basic_color;
   text-shadow: none;
 }
+
+// 内容 :hover 状态时，盒子阴影
+.boxS_h {
+  &:hover {
+    box-shadow: 0 0 6px 0 #00000020;
+  }
+}

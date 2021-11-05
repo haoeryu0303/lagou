@@ -50,9 +50,6 @@ export default {
       area: "全国站",
     };
   },
-  mounted() {
-    console.log(this.$route.path);
-  },
 };
 </script>
 

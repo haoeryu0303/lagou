@@ -1,0 +1,20 @@
+{
+  "statues": 10,
+  "banner": [{
+      "url": "javascript:;",
+      "imgUrl": "/images/index/banner/0001.jpg"
+    },
+    {
+      "url": "javascript:;",
+      "imgUrl": "/images/index/banner/0002.jpg"
+    },
+    {
+      "url": "javascript:;",
+      "imgUrl": "/images/index/banner/0003.png"
+    },
+    {
+      "url": "javascript:;",
+      "imgUrl": "/images/index/banner/0004.png"
+    }
+  ]
+}
