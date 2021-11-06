@@ -1,66 +1,38 @@
 /**
- * 首页数据模拟
+ * mock数据模拟
  */
 import Mock from 'mockjs'
-// 24hour职位列表
-Mock.mock('/hourJobList', /post|get/i, {
-  // /post|get/i 匹配post和get模式 也可以用'post'或'get'
-  // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+// 获取请求地址中的参数函数
+const getQuery = (url, name) => {
+  const index = url.indexOf('?')
+  if (index !== -1) {
+    const queryStrArr = url.substr(index + 1).split('&')
+    for (var i = 0; i < queryStrArr.length; i++) {
+      const itemArr = queryStrArr[i].split('=')
+      console.log(itemArr)
+      if (itemArr[0] === name) {
+        return itemArr[1]
+      }
+    }
+  }
+  return null
+}
+// 模拟---数据
+const data = Mock.mock({
+  // 用户列表
+  user: [{
+    'id': '@increment(1)',
+    "name": '皓',
+    'nickname': '昵称不能为空',
+    'password': 'admin',
+    'phone': 13355558880,
+  }],
+  // 首页banner
+  banner: {},
   // 24hour
-  'hourJobList|9': [{
+  'hourJobList|100-300': [{
     'id|1001-9999': 1001,
-    'name|1': [
-      "教师",
-      "工人",
-      "记者",
-      "演员",
-      "厨师",
-      "医生",
-      "护士",
-      "司机",
-      "军人",
-      "律师",
-      "商人",
-      "会计",
-      "店员",
-      "出纳",
-      "作家",
-      "导游",
-      "模特",
-      "警察",
-      "歌手",
-      "画家",
-      "裁缝",
-      "翻译",
-      "法官",
-      "保安",
-      "花匠",
-      "服务员",
-      "清洁工",
-      "建筑师",
-      "理发师",
-      "采购员",
-      "设计师",
-      "消防员",
-      "机修工",
-      "推销员",
-      "魔术师",
-      "模特儿",
-      "邮递员",
-      "售货员",
-      "救生员",
-      "运动员",
-      "工程师",
-      "飞行员",
-      "管理员",
-      "机械师",
-      "经纪人",
-      "审计员",
-      "漫画家",
-      "园艺师",
-      "科学家",
-      "主持人",
-    ],
+    'name': '@ctitle(3,6)',
     pushTime: '@datetime(HH:mm)',
     require: {
       'exp|1': ["1-3年", "3-5年", "5-10年", '不限'],
@@ -81,60 +53,9 @@ Mock.mock('/hourJobList', /post|get/i, {
     }
   }],
   // 最新职位列表
-  'newJobList|9': [{
+  'newJobList|90-200': [{
     'id|1001-9999': 1001,
-    'name|1': [
-      "教师",
-      "工人",
-      "记者",
-      "演员",
-      "厨师",
-      "医生",
-      "护士",
-      "司机",
-      "军人",
-      "律师",
-      "商人",
-      "会计",
-      "店员",
-      "出纳",
-      "作家",
-      "导游",
-      "模特",
-      "警察",
-      "歌手",
-      "画家",
-      "裁缝",
-      "翻译",
-      "法官",
-      "保安",
-      "花匠",
-      "服务员",
-      "清洁工",
-      "建筑师",
-      "理发师",
-      "采购员",
-      "设计师",
-      "消防员",
-      "机修工",
-      "推销员",
-      "魔术师",
-      "模特儿",
-      "邮递员",
-      "售货员",
-      "救生员",
-      "运动员",
-      "工程师",
-      "飞行员",
-      "管理员",
-      "机械师",
-      "经纪人",
-      "审计员",
-      "漫画家",
-      "园艺师",
-      "科学家",
-      "主持人",
-    ],
+    'name': '@ctitle(3,10)',
     pushTime: '@datetime(HH:mm)',
     require: {
       'exp|1': ["1-3年", "3-5年", "5-10年", '不限'],
@@ -155,7 +76,7 @@ Mock.mock('/hourJobList', /post|get/i, {
     }
   }],
   // 公司列表
-  'cpyList|8': [{
+  'cpyList|120-220': [{
     'id|1001-9999': 1001,
     'indList|1-3': ['@ctitle(2,3)'],
     'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
@@ -166,9 +87,7 @@ Mock.mock('/hourJobList', /post|get/i, {
     'ms|1-99': 1,
     'job|1-99': 1,
     'jl|1-99': 1,
-  }]
-})
-Mock.mock('/hotLink', /post|get/i, {
+  }],
   // 热门链接列表
   hotLink: {
     blogroll: {
@@ -195,6 +114,93 @@ Mock.mock('/hotLink', /post|get/i, {
       id: 6,
       'list|20-50': ['@ctitle(2,6)'],
     }
-
+  }
+});
+/**
+ * 模拟---接口列表
+ */
+// ----------------------------user接口
+// 用户登录
+Mock.mock('/login', 'post', (options) => {
+  let body=JSON.parse(options.body);
+  const phone = body.params.phone,
+  password = body.params.password;
+  for (var i = 0; i < data.user.length; i++) {
+    console.log(data.user[i].phone)
+    if (data.user[i].phone == phone) {
+      console.log("用户存在")
+      if (data.user[i].password == password) {
+        console.log("密码正确")
+        return {
+          status: 200,
+          message: "登录成功",
+          user: data.user[i]
+        }
+      } else {
+        return {
+          status: 200,
+          message: "用户名或密码错误",
+        }
+      }
+      
+    } else {
+      // const adduser = Mock.mock({
+      //   id: '@increment(1)',
+      //   name: "",
+      //   nickname: "@title(3,10)",
+      //   phone: phone,
+      //   password: password
+      // })
+      // data.user.push(adduser)
+      return {
+        status: 200,
+        message: "用户不存在",
+        // user: adduser
+      }
+    }
   }
 })
+// ----------------------------user接口
+// ----------------------------首页接口
+// 首页24小时工作列表
+Mock.mock(RegExp('/hourJobList' + '.*'), 'get', (options) => {
+  const size = getQuery(options.url, 'size') ? getQuery(options.url, 'size') : 30;
+  const page = getQuery(options.url, 'page') ? getQuery(options.url, 'page') : 0;
+  // console.log(size);
+  // console.log(getQuery(options.url),'size')
+  return {
+    status: 200,
+    message: "成功",
+    hourJobList: data.hourJobList.slice(page * size, (page + 1) * size)
+  }
+})
+// 首页最新工作列表
+Mock.mock(RegExp('/newJobList' + '.*'), 'get', (options) => {
+  const size = getQuery(options.url, 'size') ? getQuery(options.url, 'size') : 30;
+  const page = getQuery(options.url, 'page') ? getQuery(options.url, 'page') : 0;
+  console.log(options);
+  return {
+    status: 200,
+    message: "成功",
+    newJobList: data.newJobList.slice(page * size, (page + 1) * size)
+  }
+})
+// 首页公司列表
+Mock.mock(RegExp('/cpyList' + '.*'), 'get', (options) => {
+  const size = getQuery(options.url, 'size') ? getQuery(options.url, 'size') : 30;
+  const page = getQuery(options.url, 'page') ? getQuery(options.url, 'page') : 0;
+  return {
+    status: 200,
+    message: "成功",
+    cpyList: data.cpyList.slice(page * size, (page + 1) * size)
+  }
+})
+// 首页热门链接列表
+Mock.mock('/hotLink', 'get', () => {
+  return {
+    status: 200,
+    message: "成功",
+    hotLink: data.hotLink
+  }
+})
+// ----------------------------首页接口

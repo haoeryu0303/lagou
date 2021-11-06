@@ -86,11 +86,16 @@ export default {
     },
     // 登录功能
     login() {
-      if (this.pho == 13335558880 && this.psd == "121212") {
-        this.$router.push({
-          path: "/index",
+      this.axios
+        .post("/login", { params: { phone: 13355559990, password: "admin" } })
+        .then((res) => {
+          console.log(res.data.user);
         });
-      }
+      // if (this.pho == 13335558880 && this.psd == "121212") {
+      //   this.$router.push({
+      //     path: "/index",
+      //   });
+      // }
     },
   },
   mounted() {

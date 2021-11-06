@@ -322,17 +322,42 @@ export default {
     },
     // 获取首页 24hour，最新工作，公司 列表
     _getHourJobList() {
-      this.axios("/hourJobList").then((res) => {
+      this.axios("/hourJobList", {
+        params: {
+          size: 9,
+        },
+      }).then((res) => {
         this.hourJobList = res.data.hourJobList;
-        this.newJobList = res.data.newJobList;
-        this.cpyList = res.data.cpyList;
       });
+    },
+    // 获取首页最新工作列表
+    _getNewJobList() {
+      this.axios
+        .get("/newJobList", {
+          params: {
+            size: 9,
+          },
+        })
+        .then((res) => {
+          this.newJobList = res.data.newJobList;
+        });
+    },
+    // 获取首页公司列表
+    _getCpyList() {
+      this.axios
+        .get("/cpyList", {
+          params: {
+            size: 8,
+          },
+        })
+        .then((res) => {
+          this.cpyList = res.data.cpyList;
+        });
     },
     // 获取热门链接
     _gethotLink() {
       this.axios("/hotLink").then((res) => {
         this.hotLinkItem = res.data.hotLink;
-        console.log(this.hotLinkItem);
       });
     },
   },
@@ -340,6 +365,8 @@ export default {
     this._getNavList();
     this._getBanner();
     this._getHourJobList();
+    this._getNewJobList();
+    this._getCpyList();
     this._gethotLink();
   },
 };
@@ -561,6 +588,7 @@ export default {
                 color: #333;
                 max-width: 100px;
                 margin-right: 18px;
+                @include eps(1);
               }
               .pay {
                 color: $pay_color;
