@@ -81,7 +81,7 @@
           >
             <div class="job">
               <p class="j-head cf">
-                <span class="name">{{ item.name }}</span>
+                <span class="name fl">{{ item.name }}</span>
                 <span class="time">[{{ item.pushTime }}发布]</span>
                 <span class="pay fr">{{ item.pay }}</span>
               </p>
@@ -105,7 +105,9 @@
               /></a>
               <div class="cpy-info fl">
                 <p class="name">
-                  <a href="javascript:;" class="green">{{ item.cpyName }}</a>
+                  <a href="javascript:;" class="green" :title="item.cpyName">{{
+                    item.cpyName
+                  }}</a>
                 </p>
                 <p class="tip">
                   <span>{{ item.workType }}</span>
@@ -127,7 +129,7 @@
           >
             <div class="job">
               <p class="j-head cf">
-                <span class="name">{{ item.name }}</span>
+                <span class="name fl">{{ item.name }}</span>
                 <span class="time">[{{ item.pushTime }}发布]</span>
                 <span class="pay fr">{{ item.pay }}</span>
               </p>
@@ -151,7 +153,9 @@
               /></a>
               <div class="cpy-info fl">
                 <p class="name green">
-                  <a href="javascript:;">{{ item.cpyName }}</a>
+                  <a href="javascript:;" :title="item.cpyName">{{
+                    item.cpyName
+                  }}</a>
                 </p>
                 <p class="tip">
                   <span>{{ item.workType }}</span>
@@ -184,7 +188,9 @@
                 <img :src="cpyItem.cpyImg" class="i-logo" />
               </a>
               <div class="c-name">
-                <a href="javascript:;">{{ cpyItem.cpyName }}</a>
+                <a href="javascript:;" :title="cpyItem.cpyName">{{
+                  cpyItem.cpyName
+                }}</a>
               </div>
               <p class="tip">
                 <span v-for="(iItem, iIndex) in cpyItem.indList" :key="iIndex"
@@ -192,18 +198,18 @@
                 ><span class="line">/</span>
                 <span>{{ cpyItem.finance }}</span>
               </p>
-              <p class="desc">{{ cpyItem.desc }}</p>
+              <p class="desc" :title="cpyItem.desc">{{ cpyItem.desc }}</p>
             </div>
-            <div class="cpy-job cf">
-              <a href="javascript:;" class="item green_h fl">
+            <div class="cpy-job f_b_c">
+              <a href="javascript:;" class="item green_h">
                 <span class="i-count green">{{ cpyItem.ms }}</span>
                 <span class="i-name">面试评价</span>
               </a>
-              <a href="javascript:;" class="item green_h fl">
+              <a href="javascript:;" class="item green_h">
                 <span class="i-count green">{{ cpyItem.job }}</span>
                 <span class="i-name">在招职位</span>
               </a>
-              <a href="javascript:;" class="item green_h fl">
+              <a href="javascript:;" class="item green_h">
                 <span class="i-count green">{{ cpyItem.jl }}%</span>
                 <span class="i-name">简历处理率</span>
               </a>
@@ -602,7 +608,6 @@ export default {
               span {
                 display: inline-block;
                 margin-right: 8px;
-                // width: 61px;
                 height: 26px;
                 line-height: 26px;
                 border: 1px solid $border_color_D;
@@ -620,6 +625,7 @@ export default {
             }
             .cpy-info {
               line-height: 20px;
+              @include eps(1);
             }
           }
           &:hover {
@@ -669,10 +675,11 @@ export default {
             @include eps(1);
           }
           .cpy-job {
+            padding: 0 18px;
             .item {
-              width: 90px;
-              height: 52px;
-              margin-top: 12px;
+              height: 54px;
+              padding-top: 14px;
+              box-sizing: border-box;
               color: #999;
               .i-count {
                 padding-bottom: 8px;

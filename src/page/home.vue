@@ -7,6 +7,7 @@
     <nav-footer v-if="show"></nav-footer>
     <footers></footers>
     <sidebars></sidebars>
+    <no-login-footer></no-login-footer>
     <a
       href="javascript:;"
       class="go-top"
@@ -21,10 +22,18 @@
 import Footers from "../components/Footers.vue";
 import NavFooter from "../components/NavFooter.vue";
 import NavHeader from "../components/NavHeader.vue";
+import NoLoginFooter from "../components/noLoginFooter.vue";
 import SearchHeader from "../components/SearchHeader.vue";
 import Sidebars from "../components/Sidebars.vue";
 export default {
-  components: { NavHeader, NavFooter, Sidebars, SearchHeader, Footers },
+  components: {
+    NavHeader,
+    NavFooter,
+    Sidebars,
+    SearchHeader,
+    Footers,
+    NoLoginFooter,
+  },
   data() {
     return {
       show: true,
@@ -70,7 +79,6 @@ export default {
   mounted() {
     window.addEventListener("scroll", this.showBT, true);
     this.showNav();
-    // this.showBT();
   },
   watch: {
     $route: "showNav",
@@ -80,10 +88,11 @@ export default {
 <style lang="scss" scoped>
 @import "@/common/scss/mixin.scss";
 .home {
+  padding-bottom: 90px;
   .go-top {
     position: fixed;
-    right: 100px;
-    bottom: 60px;
+    right: 200px;
+    bottom: 120px;
     @include bgImg(28px, 46px, "/images/icon/backtop-new_0e4bcbc.png");
     &:hover {
       background-position: -38px 0;

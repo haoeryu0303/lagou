@@ -12,4 +12,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.app {
+  padding-bottom: 90px;
+}
 </style>

@@ -114,7 +114,12 @@ const data = Mock.mock({
       id: 6,
       'list|20-50': ['@ctitle(2,6)'],
     }
-  }
+  },
+  'adlist|5-10': [{
+    'id|+1': 1,
+    url: "#/jobs",
+    img: "@image(200x100,@color())"
+  }],
 });
 /**
  * 模拟---接口列表
@@ -122,9 +127,9 @@ const data = Mock.mock({
 // ----------------------------user接口
 // 用户登录
 Mock.mock('/login', 'post', (options) => {
-  let body=JSON.parse(options.body);
+  let body = JSON.parse(options.body);
   const phone = body.params.phone,
-  password = body.params.password;
+    password = body.params.password;
   for (var i = 0; i < data.user.length; i++) {
     console.log(data.user[i].phone)
     if (data.user[i].phone == phone) {
@@ -142,7 +147,7 @@ Mock.mock('/login', 'post', (options) => {
           message: "用户名或密码错误",
         }
       }
-      
+
     } else {
       // const adduser = Mock.mock({
       //   id: '@increment(1)',
@@ -204,3 +209,12 @@ Mock.mock('/hotLink', 'get', () => {
   }
 })
 // ----------------------------首页接口
+// ----------------------------职位接口
+Mock.mock(RegExp('/adlist' + '.*'), 'get', (options) => {
+  const size = getQuery(options.url, 'size') ? getQuery(options.url, 'size') : 5;
+  return {
+    status: 200,
+    message: "成功",
+    adlist: data.adlist.slice(0, size)
+  }
+})

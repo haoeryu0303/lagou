@@ -60,6 +60,7 @@
     background-color: #fff;
     border: 1px solid #eee;
     overflow-y: auto;
+    z-index: 200;
 
     .a-sort {
       padding: 0 12px;
@@ -79,6 +80,24 @@
     padding-left: 10px;
     width: 188px;
     color: $font_color_B;
+  }
+}
+
+.phone {
+  margin-bottom: 0 !important;
+
+  .area-code {
+    margin-bottom: 0 !important;
+
+    .p-code {
+      width: 50px;
+      line-height: 36px;
+    }
+
+    .code-list {
+      background-color: #007b5f;
+      top: -288px !important;
+    }
   }
 }
 
