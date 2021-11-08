@@ -17,3 +17,23 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: $clamp;
 }
+
+// 到三角
+@mixin triangle($color:#00b38a) {
+  position: relative;
+  width: 16px;
+  height: 8px;
+
+  &::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    content: "";
+    border: 8px solid $color;
+    border-left-color: transparent;
+    border-top: none;
+    border-right-color: transparent;
+
+
+  }
+}

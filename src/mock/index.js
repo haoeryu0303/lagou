@@ -30,7 +30,7 @@ const data = Mock.mock({
   // 首页banner
   banner: {},
   // 24hour
-  'hourJobList|100-300': [{
+  'hourJobList|38-99': [{
     'id|1001-9999': 1001,
     'name': '@ctitle(3,6)',
     pushTime: '@datetime(HH:mm)',
@@ -53,7 +53,7 @@ const data = Mock.mock({
     }
   }],
   // 最新职位列表
-  'newJobList|90-200': [{
+  'newJobList|38-99': [{
     'id|1001-9999': 1001,
     'name': '@ctitle(3,10)',
     pushTime: '@datetime(HH:mm)',
@@ -76,7 +76,7 @@ const data = Mock.mock({
     }
   }],
   // 公司列表
-  'cpyList|120-220': [{
+  'cpyList|38-99': [{
     'id|1001-9999': 1001,
     'indList|1-3': ['@ctitle(2,3)'],
     'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
@@ -115,11 +115,43 @@ const data = Mock.mock({
       'list|20-50': ['@ctitle(2,6)'],
     }
   },
+  // 广告列表
   'adlist|5-10': [{
     'id|+1': 1,
     url: "#/jobs",
-    img: "@image(200x100,@color())"
+    img: "@image(210x122,@color())"
   }],
+  // 筛选条件
+  detail: {city:{
+    name: "工作地点",
+    detailId: '@natural()',
+    'list|15-20': [{
+      'id|+1': 1,
+      name: '@city()',
+      'areaList|5-10': ['@county()'],
+      'metroList|2-12': ['@range(1,12)']
+    }]
+  }, exp:{
+    name: "工作经验",
+    detailId: '@natural()',
+    'list': ['不限','在校/应届','3年及一下','3-5年','5-10年','10年以上','不要求']
+  }, req:{
+    name: "学历要求",
+    detailId: '@natural()',
+    'list': ['不限','大专','本科','硕士及以上','不要求']
+  }, fin:{
+    name: "融资阶段",
+    detailId: '@natural()',
+    'list': ['不限','为融资','天使轮','A轮','B轮','C轮','D轮及以上','上市公司','不需要融资']
+  }, sca:{
+    name: "公司规模",
+    detailId: '@natural()',
+    'list': ['不限','少于15人','15-50人','50-150人','150-500人','500-2000人','2000人以上']
+  }, ind:{
+    name: "行业领域",
+    detailId: '@natural()',
+    'list|10-20': ['@ctitle']
+  }}
 });
 /**
  * 模拟---接口列表
@@ -210,6 +242,7 @@ Mock.mock('/hotLink', 'get', () => {
 })
 // ----------------------------首页接口
 // ----------------------------职位接口
+// 广告
 Mock.mock(RegExp('/adlist' + '.*'), 'get', (options) => {
   const size = getQuery(options.url, 'size') ? getQuery(options.url, 'size') : 5;
   return {
@@ -218,3 +251,33 @@ Mock.mock(RegExp('/adlist' + '.*'), 'get', (options) => {
     adlist: data.adlist.slice(0, size)
   }
 })
+// 筛选条件
+Mock.mock(RegExp('/detail/city' + '.*'), 'get', () => {
+  return {
+    status: 200,
+    message: "成功",
+    city: data.detail[0]
+  }
+})
+Mock.mock(RegExp('/detail/city' + '.*'), 'get', () => {
+  return {
+    status: 200,
+    message: "成功",
+    city: data.detail[0]
+  }
+})
+Mock.mock(RegExp('/detail/city' + '.*'), 'get', () => {
+  return {
+    status: 200,
+    message: "成功",
+    city: data.detail[0]
+  }
+})
+Mock.mock(RegExp('/detail' + '.*'), 'get', () => {
+  return {
+    status: 200,
+    message: "成功",
+    detail: data.detail
+  }
+})
+// ----------------------------职位接口

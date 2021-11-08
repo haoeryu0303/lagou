@@ -96,6 +96,13 @@
   }
 }
 
+.green_bg_h {
+  &:hover {
+    background-color: $basic_color !important;
+    color: #FFFFFF;
+  }
+}
+
 // input 提示文字的默认颜色
 input::-webkit-input-placeholder {
   color: $font_color_C;
@@ -134,4 +141,8 @@ body ::-moz-selection {
   &:hover {
     box-shadow: 0 0 6px 0 #00000020;
   }
+}
+
+.rotate_180 {
+  transform: rotate(180deg);
 }

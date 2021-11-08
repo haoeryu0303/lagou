@@ -4,36 +4,99 @@
     <div class="container cf">
       <div class="left-wrap fl">
         <div class="detail sizer border">
-          <!-- 筛选条件 之 工作地点 -->
-          <div class="area sizer-item">
-            <span class="tit">工作地点:</span>
-            <div class="s-i-wrap">
-              <span class="s-item active"></span>
-              <span class="s-item"></span>
-            </div>
-          </div>
-          <!-- 筛选条件 之 工作经验 -->
-          <div class="exp sizer-item">
-            <span class="tit">工作经验:</span>
-          </div>
-          <!-- 筛选条件 之 学历要求 -->
-          <div class="req sizer-item">
-            <span class="tit">学历要求:</span>
-          </div>
-          <!-- 筛选条件 之 融资阶段 -->
-          <div class="fin sizer-item">
-            <span class="tit">融资阶段:</span>
-          </div>
-          <!-- 筛选条件 之 公司规模 -->
-          <div class="sca sizer-item">
-            <span class="tit">公司规模:</span>
-          </div>
-          <!-- 筛选条件 之 行业领域 -->
-          <div class="ind sizer-item">
-            <span class="tit">行业领域:</span>
+          <!-- 筛选条件 -->
+          <div
+            class="area sizer-item cf"
+            :class="{
+              'hide-city-more': hideCity && dIndex == 'city',
+              'hide-ind-more': hideInd && dIndex == 'ind',
+            }"
+            v-for="(dItem, dIndex) in detail"
+            :key="dIndex"
+          >
+            <span class="tit fl">{{ dItem.name }}:</span>
+            <span class="s-item active fl" v-if="dIndex == 'city'">{{
+              checkCity
+            }}</span>
+            <span
+              class="s-item green_bg_h fl"
+              v-for="(subItem, subIndex) in dItem.list"
+              :key="subIndex"
+            >
+              {{ subItem.name ? subItem.name : subItem }}
+            </span>
+            <span
+              class="btn fr"
+              v-if="dIndex == 'city'"
+              @click="hideCity = !hideCity"
+              >更多<i class="more-btn" :class="{ rotate: !hideCity }"></i
+            ></span>
+            <span
+              class="btn fr"
+              v-if="dIndex == 'ind'"
+              @click="hideInd = !hideInd"
+              >更多<i class="more-btn" :class="{ rotate: !hideInd }"></i
+            ></span>
           </div>
         </div>
-        <div class="sort sizer border"></div>
+        <div class="sort sizer border cf">
+          <div class="method fl">
+            <span class="tit">排序方式:</span>
+            <span class="m-item green_bg_h" :class="{ active: sort.def }"
+              >默认</span
+            >
+            <span class="m-item green_bg_h" :class="{ active: !sort.def }"
+              >最新</span
+            >
+          </div>
+          <div class="method fl">
+            <span class="tit">月薪:</span>
+            <span class="show-sort" @click="sort.hideSalary = !sort.hideSalary"
+              >{{ sort.checkSalary }}
+              <i class="triangle" :class="{ rotate_180: sort.hideSalary }"></i>
+            </span>
+            <ul class="list" :class="{ hide: sort.hideSalary }">
+              <li
+                class="item green_h"
+                v-for="(sItem, sIndex) in sort.salary"
+                :key="sIndex"
+                @click="
+                  sort.checkSalary = sItem;
+                  sort.hideSalary = true;
+                "
+              >
+                {{ sItem }}
+              </li>
+            </ul>
+          </div>
+          <div class="method fl">
+            <span class="tit">工作性质:</span>
+            <span class="show-sort" @click="sort.hideFull = !sort.hideFull"
+              >{{ sort.checkFull
+              }}<i class="triangle" :class="{ rotate_180: sort.hideFull }"></i
+            ></span>
+            <ul class="list" :class="{ hide: sort.hideFull }">
+              <li
+                class="item green_h"
+                v-for="(fItem, fIndex) in sort.full"
+                :key="fIndex"
+                @click="
+                  sort.checkFull = fItem;
+                  sort.hideFull = true;
+                "
+              >
+                {{ fItem }}
+              </li>
+            </ul>
+          </div>
+          <div class="page">
+            <span class="btn prev">&lt;</span>
+            <span
+              ><em class="green">1</em><em class="line">/</em><em>10</em></span
+            >
+            <span class="btn next">&gt;</span>
+          </div>
+        </div>
         <ul class="job-list">
           <li class="job-item border">job</li>
         </ul>
@@ -49,7 +112,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "jobs",
@@ -57,77 +119,51 @@ export default {
   data() {
     return {
       adlist: [],
-      detail: [
-        {
-          type: "area",
-          list: [
-            "全国",
-            "北京",
-            "上海",
-            "深圳",
-            "广州",
-            "杭州",
-            "成都",
-            "南京",
-            "武汉",
-            "西安",
-            "厦门",
-            "长沙",
-            "苏州",
-            "天津",
-            "重庆",
-            "郑州",
-            "青岛",
-            "合肥",
-            "福州",
-            "济南",
-            "大连",
-            "珠海",
-            "无锡",
-            "佛山",
-            "东莞",
-            "宁波",
-            "常州",
-            "沈阳",
-            "石家庄",
-            "昆明",
-            "南昌",
-            "南宁",
-            "哈尔滨",
-            "海口",
-            "中山",
-            "惠州",
-            "贵阳",
-            "长春",
-            "太原",
-            "嘉兴",
-            "泰安",
-            "昆山",
-            "烟台",
-            "兰州",
-            "泉州",
-            "全部城市",
-          ],
-        },
-      ],
+      detail: {},
+      checkCity: "全国",
+      hideCity: true,
+      hideInd: true,
+      sort: {
+        def: true,
+        checkFull: "不限",
+        hideFull: true,
+        checkSalary: "不限",
+        hideSalary: true,
+        salary: [
+          "不限",
+          "2k以下",
+          "2k-5k",
+          "5k-10k",
+          "10k-15k",
+          "15k-25k",
+          "25k-50k",
+          "50kl以上",
+        ],
+        full: ["不限", "全职", "兼职", "实习"],
+      },
     };
   },
   methods: {
     _getAdList() {
       this.axios.get("/adlist", { params: { size: 3 } }).then((res) => {
         this.adlist = res.data.adlist;
-        console.log(res);
+      });
+    },
+    _getDetail() {
+      this.axios.get("/detail").then((res) => {
+        this.detail = res.data.detail;
       });
     },
   },
   mounted() {
     this._getAdList();
+    this._getDetail();
   },
 };
 </script>
-
 <style lang='scss' scoped>
 @import "@//common/scss/variable.scss";
+@import "@//common/scss/mixin.scss";
 .jobs {
   .container {
     padding-top: 186px;
@@ -140,11 +176,128 @@ export default {
       .sizer {
         padding: 8px 12px;
         background-color: #fafafa;
+        line-height: 28px;
+        position: relative;
+        .tit {
+          font-weight: bold;
+          color: #333;
+          margin-right: 10px;
+        }
+        // 筛选条件
         .sizer-item {
-          .tit {
-            font-weight: bold;
-            font-size: 14px;
-            color: #333;
+          position: relative;
+          padding-right: 50px;
+          margin-bottom: 10px;
+
+          .s-item {
+            padding: 0 10px;
+            cursor: pointer;
+          }
+          .active {
+            margin-right: 10px;
+            line-height: 26px;
+            border: 1px solid $border_color_C;
+          }
+          .btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            line-height: 28px;
+            cursor: pointer;
+            color: #999;
+            .more-btn {
+              display: inline-block;
+              vertical-align: middle;
+              @include bgImg(10px, 10px, "/images/icon/down.png");
+              background-size: contain;
+              margin-left: 6px;
+              transition: all 0.3s;
+            }
+            .rotate {
+              transform: rotate(180deg);
+            }
+          }
+        }
+        .hide-city-more,
+        .hide-ind-more {
+          height: 28px;
+          overflow: hidden;
+        }
+        // 排序
+        .method {
+          margin-right: 20px;
+          height: 28px;
+          position: relative;
+          span {
+            display: inline-block;
+            line-height: 28px;
+          }
+          .m-item {
+            padding: 0 10px;
+            margin-right: 6px;
+          }
+          .active {
+            background-color: $basic_color;
+            color: #fff;
+          }
+          .show-sort {
+            width: 85px;
+            height: 28px;
+            border: 1px solid $border_color_D;
+            box-sizing: border-box;
+            padding-left: 10px;
+            .triangle {
+              @include triangle($border_color_B);
+              position: absolute;
+              top: 12px;
+              right: 5px;
+              transition: all 0.3s;
+            }
+          }
+          .list {
+            position: absolute;
+            top: 28px;
+            right: 0;
+            width: 85px;
+            background-color: #fff;
+            border: 1px solid $border_color_D;
+            box-sizing: border-box;
+            z-index: 10;
+            .item {
+              padding-left: 10px;
+            }
+          }
+          .hide {
+            display: none;
+          }
+        }
+        .page {
+          position: absolute;
+          right: 0;
+          top: 0;
+          padding: 0 10px;
+          border-left: 1px solid $border_color_B;
+          height: 44px;
+          line-height: 44px;
+          .btn {
+            display: inline-block;
+            line-height: 44px;
+            font-family: "Courier New", Courier, monospace;
+            cursor: pointer;
+            color: $font_color_C;
+
+            &:hover {
+              color: #333;
+            }
+          }
+          .prev {
+            margin-right: 16px;
+          }
+          .next {
+            margin-left: 16px;
+          }
+          .line {
+            margin: 0 6px;
           }
         }
       }
@@ -153,6 +306,8 @@ export default {
       width: 210px;
       .ad-item {
         margin-bottom: 10px;
+        width: 210px;
+        height: 122px;
         .ad-link {
           display: block;
           position: relative;
@@ -165,6 +320,8 @@ export default {
             color: #000;
           }
           .ad-img {
+            width: 210px;
+            height: 122px;
           }
         }
       }
