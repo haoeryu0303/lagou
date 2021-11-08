@@ -15,13 +15,21 @@
             :key="dIndex"
           >
             <span class="tit fl">{{ dItem.name }}:</span>
-            <span class="s-item active fl" v-if="dIndex == 'city'">{{
-              checkCity
-            }}</span>
+            <span
+              class="s-item fl"
+              :class="{
+                'city-active': dIndex == 'city',
+                active: dIndex != 'city',
+              }"
+              v-if="dIndex != 'ind'"
+              >{{ dItem.impliedCondition }}</span
+            >
             <span
               class="s-item green_bg_h fl"
+              :class="{ chosen: chosen }"
               v-for="(subItem, subIndex) in dItem.list"
               :key="subIndex"
+              @click="chosen = !chosen"
             >
               {{ subItem.name ? subItem.name : subItem }}
             </span>
@@ -29,23 +37,29 @@
               class="btn fr"
               v-if="dIndex == 'city'"
               @click="hideCity = !hideCity"
-              >更多<i class="more-btn" :class="{ rotate: !hideCity }"></i
+              >更多<i class="triangle" :class="{ rotate_180: hideCity }"></i
             ></span>
             <span
               class="btn fr"
               v-if="dIndex == 'ind'"
               @click="hideInd = !hideInd"
-              >更多<i class="more-btn" :class="{ rotate: !hideInd }"></i
+              >更多<i class="triangle" :class="{ rotate_180: hideInd }"></i
             ></span>
           </div>
         </div>
         <div class="sort sizer border cf">
           <div class="method fl">
             <span class="tit">排序方式:</span>
-            <span class="m-item green_bg_h" :class="{ active: sort.def }"
+            <span
+              class="m-item green_bg_h"
+              :class="{ active: sort.def }"
+              @click="sort.def = true"
               >默认</span
             >
-            <span class="m-item green_bg_h" :class="{ active: !sort.def }"
+            <span
+              class="m-item green_bg_h"
+              :class="{ active: !sort.def }"
+              @click="sort.def = false"
               >最新</span
             >
           </div>
@@ -123,6 +137,8 @@ export default {
       checkCity: "全国",
       hideCity: true,
       hideInd: true,
+      chosen: false,
+
       sort: {
         def: true,
         checkFull: "不限",
@@ -187,13 +203,24 @@ export default {
         .sizer-item {
           position: relative;
           padding-right: 50px;
-          margin-bottom: 10px;
-
+          margin-bottom: 6px;
           .s-item {
-            padding: 0 10px;
+            padding: 0 5px;
             cursor: pointer;
+            margin-right: 5px;
+            margin-bottom: 3px;
+          }
+          .chosen {
+            background: $basic_color;
+            color: #fff;
           }
           .active {
+            margin-right: 10px;
+            line-height: 28px;
+            background-color: $basic_color;
+            color: #fff;
+          }
+          .city-active {
             margin-right: 10px;
             line-height: 26px;
             border: 1px solid $border_color_C;
@@ -203,6 +230,7 @@ export default {
             right: 0;
             top: 0;
             line-height: 28px;
+            padding-right: 20px;
             cursor: pointer;
             color: #999;
             .more-btn {
@@ -213,8 +241,13 @@ export default {
               margin-left: 6px;
               transition: all 0.3s;
             }
-            .rotate {
-              transform: rotate(180deg);
+            .triangle {
+              @include triangle($basic_color);
+              margin-left: 20px;
+              position: absolute;
+              right: 0;
+              top: 10px;
+              transition: all 0.3s;
             }
           }
         }
@@ -247,7 +280,7 @@ export default {
             box-sizing: border-box;
             padding-left: 10px;
             .triangle {
-              @include triangle($border_color_B);
+              @include triangle($triangle_color_A);
               position: absolute;
               top: 12px;
               right: 5px;

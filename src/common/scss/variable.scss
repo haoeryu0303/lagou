@@ -1,20 +1,42 @@
-// 颜色变量
-$basic_color: #00b38a; //主体颜色
-$bg_color: #00906f; //背景色A
-$nav_head_bg_color: #32373e; //顶部导航栏背景
-$search_head_bg_color: #F2F5F4; //顶部搜索区域背景色
-$pay_color: #fa6041; //薪水字体颜色
-$font_color_A: #333; //基础字体颜色A
-$font_color_B: #666; //基础字体颜色B
-$font_color_C: #999; //基础字体颜色C 用于部分链接
-$font_color_D: #007d61; //基础字体颜色B
-$nav_font_color: #AFB5C0; //导航栏字体颜色
-$nav_bg_color: #32373E; //导航栏字体背景色
-$border_color_A: #ededed; //border颜色A
-$border_color_B: #e8e8e8; //border颜色B
-$border_color_C: #eeeeee; //border颜色C
-$border_color_D: #f0f0f0; //border颜色D
-// 字体大小变量
+/**
+颜色变量
+*/
+//主体颜色
+$basic_color: #00b38a;
+//背景色A
+$bg_color: #00906f;
+//顶部导航栏背景
+$nav_head_bg_color: #32373e;
+//顶部搜索区域背景色
+$search_head_bg_color: #F2F5F4;
+//薪水字体颜色
+$pay_color: #fa6041;
+//基础字体颜色A
+$font_color_A: #333;
+//基础字体颜色B
+$font_color_B: #666;
+//基础字体颜色C 用于部分链接
+$font_color_C: #999;
+//基础字体颜色B
+$font_color_D: #007d61;
+//导航栏字体颜色
+$nav_font_color: #AFB5C0;
+//导航栏字体背景色
+$nav_bg_color: #32373E;
+//border颜色A
+$border_color_A: #ededed;
+//border颜色B
+$border_color_B: #e8e8e8;
+//border颜色C
+$border_color_C: #eeeeee;
+//border颜色D
+$border_color_D: #f0f0f0;
+//到三角颜色
+$triangle_color_A:#9b9b9b;
+
+/**
+字体大小变量
+*/
 $font_size_A: 14px;
 $font_size_B: 16px;
 $font_size_C: 12px;

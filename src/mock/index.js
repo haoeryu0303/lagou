@@ -125,6 +125,7 @@ const data = Mock.mock({
   detail: {city:{
     name: "工作地点",
     detailId: '@natural()',
+    impliedCondition:"全国",
     'list|15-20': [{
       'id|+1': 1,
       name: '@city()',
@@ -134,19 +135,23 @@ const data = Mock.mock({
   }, exp:{
     name: "工作经验",
     detailId: '@natural()',
-    'list': ['不限','在校/应届','3年及一下','3-5年','5-10年','10年以上','不要求']
+    impliedCondition:"不限",
+    'list': ['在校/应届','3年及一下','3-5年','5-10年','10年以上','不要求']
   }, req:{
     name: "学历要求",
     detailId: '@natural()',
-    'list': ['不限','大专','本科','硕士及以上','不要求']
+    impliedCondition:"不限",
+    'list': ['大专','本科','硕士及以上','不要求']
   }, fin:{
     name: "融资阶段",
     detailId: '@natural()',
-    'list': ['不限','为融资','天使轮','A轮','B轮','C轮','D轮及以上','上市公司','不需要融资']
+    impliedCondition:"不限",
+    'list': ['为融资','天使轮','A轮','B轮','C轮','D轮及以上','上市公司','不需要融资']
   }, sca:{
     name: "公司规模",
     detailId: '@natural()',
-    'list': ['不限','少于15人','15-50人','50-150人','150-500人','500-2000人','2000人以上']
+    impliedCondition:"不限",
+    'list': ['少于15人','15-50人','50-150人','150-500人','500-2000人','2000人以上']
   }, ind:{
     name: "行业领域",
     detailId: '@natural()',
