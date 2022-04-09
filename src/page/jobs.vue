@@ -65,7 +65,12 @@
           </div>
           <div class="method fl">
             <span class="tit">月薪:</span>
-            <span class="show-sort" @click="sort.hideSalary = !sort.hideSalary"
+            <span
+              class="show-sort"
+              @click.stop="
+                sort.hideSalary = !sort.hideSalary;
+                sort.hideFull = true;
+              "
               >{{ sort.checkSalary }}
               <i class="triangle" :class="{ rotate_180: sort.hideSalary }"></i>
             </span>
@@ -85,7 +90,12 @@
           </div>
           <div class="method fl">
             <span class="tit">工作性质:</span>
-            <span class="show-sort" @click="sort.hideFull = !sort.hideFull"
+            <span
+              class="show-sort"
+              @click.stop="
+                sort.hideFull = !sort.hideFull;
+                sort.hideSalary = true;
+              "
               >{{ sort.checkFull
               }}<i class="triangle" :class="{ rotate_180: sort.hideFull }"></i
             ></span>
@@ -174,6 +184,10 @@ export default {
   mounted() {
     this._getAdList();
     this._getDetail();
+    document.addEventListener("click", () => {
+      this.sort.hideFull = true;
+      this.sort.hideSalary = true;
+    });
   },
 };
 </script>
@@ -279,6 +293,7 @@ export default {
             border: 1px solid $border_color_D;
             box-sizing: border-box;
             padding-left: 10px;
+            cursor: pointer;
             .triangle {
               @include triangle($triangle_color_A);
               position: absolute;
@@ -298,6 +313,7 @@ export default {
             z-index: 10;
             .item {
               padding-left: 10px;
+              cursor: pointer;
             }
           }
           .hide {
@@ -318,7 +334,7 @@ export default {
             font-family: "Courier New", Courier, monospace;
             cursor: pointer;
             color: $font_color_C;
-
+            font-weight: bold;
             &:hover {
               color: #333;
             }

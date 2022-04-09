@@ -29,34 +29,12 @@ const data = Mock.mock({
   }],
   // 首页banner
   banner: {},
-  // 24hour
-  'hourJobList|38-99': [{
+  // 工作列表
+  'jobs|101-199':[{
     'id|1001-9999': 1001,
     'name': '@ctitle(3,6)',
     pushTime: '@datetime(HH:mm)',
-    require: {
-      'exp|1': ["1-3年", "3-5年", "5-10年", '不限'],
-      'edu|1': ["高中", "大专", "本科", "硕士"],
-      'full|1': ["全职", "兼职", "实习"],
-    },
-    'pay|1': ["4k-6k", "7k-9k", "10k-20k*15薪", "20k-40k", "8k-16k", ],
-    'indList|1-3': ['@ctitle(2,6)'],
-    'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
-    'cpyName': '@ctitle(2,8)公司',
-    'workType|1': ['work@word(1)'],
-    'finance|1': ['A轮', 'B轮', 'C轮', 'D轮', '天使轮', '上市公司'],
-    'address': '@county(true)',
-    'city': '@city',
-    'jobDesc': {
-      'obligation|3-5': ['岗位职责-@csentence(4,16)'],
-      'jobRequire|3-7': ['任职要求-@csentence(8,20)'],
-    }
-  }],
-  // 最新职位列表
-  'newJobList|38-99': [{
-    'id|1001-9999': 1001,
-    'name': '@ctitle(3,10)',
-    pushTime: '@datetime(HH:mm)',
+    'recType|1':[0,1,2],//1：校招，2：直招。
     require: {
       'exp|1': ["1-3年", "3-5年", "5-10年", '不限'],
       'edu|1': ["高中", "大专", "本科", "硕士"],
@@ -76,7 +54,7 @@ const data = Mock.mock({
     }
   }],
   // 公司列表
-  'cpyList|38-99': [{
+  'companies|38-99': [{
     'id|1001-9999': 1001,
     'indList|1-3': ['@ctitle(2,3)'],
     'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
@@ -116,7 +94,7 @@ const data = Mock.mock({
     }
   },
   // 广告列表
-  'adlist|5-10': [{
+  'ads|5-10': [{
     'id|+1': 1,
     url: "#/jobs",
     img: "@image(210x122,@color())"
@@ -156,7 +134,29 @@ const data = Mock.mock({
     name: "行业领域",
     detailId: '@natural()',
     'list|10-20': ['@ctitle']
-  }}
+  }},
+  'alljob|90-150':[{
+    'id|1001-9999': 1001,
+    'name': '@ctitle(3,6)',
+    pushTime: '@datetime(HH:mm)',
+    require: {
+      'exp|1': ["1-3年", "3-5年", "5-10年", '不限'],
+      'edu|1': ["高中", "大专", "本科", "硕士"],
+      'full|1': ["全职", "兼职", "实习"],
+    },
+    'pay|1': ["4k-6k", "7k-9k", "10k-20k*15薪", "20k-40k", "8k-16k", ],
+    'indList|1-3': ['@ctitle(2,6)'],
+    'cpyImg': '/images/index/companies/cpy_logo_@natural(1,14).png',
+    'cpyName': '@ctitle(2,8)公司',
+    'workType|1': ['work@word(1)'],
+    'finance|1': ['A轮', 'B轮', 'C轮', 'D轮', '天使轮', '上市公司'],
+    'address': '@county(true)',
+    'city': '@city',
+    'jobDesc': {
+      'obligation|3-5': ['岗位职责-@csentence(4,16)'],
+      'jobRequire|3-7': ['任职要求-@csentence(8,20)'],
+    }
+  }],
 });
 /**
  * 模拟---接口列表
@@ -213,7 +213,8 @@ Mock.mock(RegExp('/hourJobList' + '.*'), 'get', (options) => {
   return {
     status: 200,
     message: "成功",
-    hourJobList: data.hourJobList.slice(page * size, (page + 1) * size)
+    countt:data.jobs.length,
+    hourJobList: data.jobs.slice(page * size, (page + 1) * size)
   }
 })
 // 首页最新工作列表
@@ -224,7 +225,8 @@ Mock.mock(RegExp('/newJobList' + '.*'), 'get', (options) => {
   return {
     status: 200,
     message: "成功",
-    newJobList: data.newJobList.slice(page * size, (page + 1) * size)
+    countt:data.jobs.length,
+    newJobList: data.jobs.slice(page * size, (page + 1) * size)
   }
 })
 // 首页公司列表
@@ -234,7 +236,8 @@ Mock.mock(RegExp('/cpyList' + '.*'), 'get', (options) => {
   return {
     status: 200,
     message: "成功",
-    cpyList: data.cpyList.slice(page * size, (page + 1) * size)
+    count:data.companies.length,
+    cpyList: data.companies.slice(page * size, (page + 1) * size)
   }
 })
 // 首页热门链接列表

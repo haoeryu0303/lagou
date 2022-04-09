@@ -79,6 +79,14 @@
             v-for="(item, index) in hourJobList"
             :key="item.id"
           >
+            <i
+              v-if="item.recType != 0"
+              class="icon rec-icn"
+              :class="{
+                'rec-icn-1': item.recType == 1,
+                'rec-icn-2': item.recType == 2,
+              }"
+            ></i>
             <div class="job">
               <p class="j-head cf">
                 <span class="name fl">{{ item.name }}</span>
@@ -127,6 +135,14 @@
             v-for="(item, index) in newJobList"
             :key="item.id"
           >
+            <i
+              v-if="item.recType != 0"
+              class="icon rec-icn"
+              :class="{
+                'rec-icn-1': item.recType == 1,
+                'rec-icn-2': item.recType == 2,
+              }"
+            ></i>
             <div class="job">
               <p class="j-head cf">
                 <span class="name fl">{{ item.name }}</span>
@@ -152,8 +168,8 @@
                 ><img :src="item.cpyImg" class="cpy-img fl"
               /></a>
               <div class="cpy-info fl">
-                <p class="name green">
-                  <a href="javascript:;" :title="item.cpyName">{{
+                <p class="name">
+                  <a href="javascript:;" :title="item.cpyName" class="green">{{
                     item.cpyName
                   }}</a>
                 </p>
@@ -571,6 +587,7 @@ export default {
       }
       .job-wrap {
         .j-item {
+          position: relative;
           width: 390px;
           height: 200px;
           border: 1px solid $border_color_B;
@@ -578,6 +595,23 @@ export default {
           padding: 20px 18px 0;
           margin: 15px 15px 0 0;
           color: #999;
+          .icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+          }
+          .rec-icn-1 {
+            background: url("/images/icon/school-recruitment_ae314a6.png")
+              no-repeat;
+            background-size: contain;
+          }
+          .rec-icn-2 {
+            background: url("/images/icon/direct-recruit_2x_0d49da5.png")
+              no-repeat;
+            background-size: contain;
+          }
           .line {
             margin: 0 4px;
           }
